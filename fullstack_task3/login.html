@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Login System</title>
+<link rel="stylesheet" href="style.css">
+
+<script>
+
+function validateForm(){
+
+let username=document.getElementById("username").value;
+let password=document.getElementById("password").value;
+let error="";
+
+if(username=="")
+error+="Username required <br>";
+
+if(password=="")
+error+="Password required <br>";
+
+if(error!=""){
+document.getElementById("error").innerHTML=error;
+return false;
+}
+
+return true;
+
+}
+
+</script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Login</h2>
+
+<div id="error" class="error"></div>
+
+<form action="login.php" method="POST" onsubmit="return validateForm()">
+
+<input type="text" id="username" name="username" placeholder="Username">
+
+<input type="password" id="password" name="password" placeholder="Password">
+
+<button type="submit">Login</button>
+
+</form>
+
+</div>
+
+</body>
+</html>
