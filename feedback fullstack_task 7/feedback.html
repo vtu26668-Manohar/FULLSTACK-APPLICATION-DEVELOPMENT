@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Interactive Feedback Form</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f4f4;
+        }
+        .container {
+            width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 10px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Customer Feedback</h2>
+
+    <label>Name:</label>
+    <input type="text" id="name" onkeypress="validateName(event)" 
+           onmouseover="highlight(this)" onmouseout="removeHighlight(this)">
+    <div id="nameError" class="error"></div>
+
+    <label>Email:</label>
+    <input type="text" id="email" onkeyup="validateEmail()" 
+           onmouseover="highlight(this)" onmouseout="removeHighlight(this)">
+    <div id="emailError" class="error"></div>
+
+    <label>Feedback:</label>
+    <textarea id="message" 
+        onmouseover="highlight(this)" 
+        onmouseout="removeHighlight(this)"></textarea>
+
+    <button ondblclick="submitForm()">Submit (Double Click)</button>
+</div>
+
+<script>
+
+// Highlight field on mouse hover
+function highlight(element) {
+    element.style.backgroundColor = "#e6f7ff";
+}
+
+// Remove highlight
+function removeHighlight(element) {
+    element.style.backgroundColor = "white";
+}
+
+// Validate Name (Allow only letters)
+function validateName(event) {
+    let char = String.fromCharCode(event.keyCode);
+    if (!/^[A-Za-z ]+$/.test(char)) {
+        event.preventDefault();
+        document.getElementById("nameError").innerText = 
+            "Only letters allowed!";
+    } else {
+        document.getElementById("nameError").innerText = "";
+    }
+}
+
+// Validate Email
+function validateEmail() {
+    let email = document.getElementById("email").value;
+    let pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+    if (!pattern.test(email)) {
+        document.getElementById("emailError").innerText = 
+            "Enter valid email!";
+    } else {
+        document.getElementById("emailError").innerText = "";
+    }
+}
+
+// Double click submit confirmation
+function submitForm() {
+    alert("Thank you! Your feedback has been submitted.");
+}
+
+</script>
+
+</body>
+</html>
